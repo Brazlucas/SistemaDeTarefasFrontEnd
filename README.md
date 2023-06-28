@@ -1,4 +1,4 @@
-# espaco-cananeia
+# crud-frontend
 
 ## Project setup
 ```
