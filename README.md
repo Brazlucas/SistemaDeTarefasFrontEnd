@@ -1,4 +1,4 @@
-# espaco-cananeia
+# crud-integration
 
 ## Project setup
 ```
