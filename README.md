@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # crud-integration
+=======
+# crud-frontend
+>>>>>>> ae498cce92b996aac2e17ae5722d7c19b3ebcb12
 
 ## Project setup
 ```
