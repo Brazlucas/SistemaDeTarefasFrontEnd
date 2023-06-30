@@ -1,20 +1,31 @@
 <template>
   <div class="content">
+    <dialog-edit
+      :user="this.user"
+      :value="openDialog"
+      @emitUser="updateUser"
+      @input="closeModal"
+    />
     <div class="content__wrap-title">
       <h1 class="content__title">Lista de Usuários</h1>
       <v-icon large>mdi-account</v-icon>
     </div>
     <v-row class="content__wrapper">
-      <v-col>
+      <div class="content__wrapper__actions">
         <v-btn outlined @click="newUser()">
           <v-icon>mdi-plus</v-icon>
           Novo usuário
         </v-btn>
-      </v-col>
+        <v-btn outlined @click="goToHome()">
+          <v-icon>mdi-arrow-left</v-icon>
+          Voltar para o menu
+        </v-btn>
+      </div>
       <v-col>
         <v-data-table
           :items="users"
           :headers="headers"
+          hide-default-footer
         >
            <template
               v-slot:item.actions="{ item }"
@@ -26,7 +37,7 @@
                     v-on="on"
                     rounded
                     icon
-                    @click="goToEditUser(item)"
+                    @click="editUser(item)"
                   >
                     <v-icon
                       size="large"
@@ -65,13 +76,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import UserService from './services/user.service'
 import { User } from './models/user.entity'
+import DialogEdit from './modals/dialog-edit.component.vue';
 
-@Component
+@Component({
+  components: {
+    DialogEdit,
+  },
+})
 export default class Users extends Vue {
   public users: Array<User> = [];
+
+  public user: User = new User();
+
+  public openDialog: boolean = false;
 
   private get headers(): any {
     const headers = [
@@ -111,6 +131,32 @@ export default class Users extends Vue {
     console.log("aqui ficará a lógica para abrir um modal e criar usuário");
   }
 
+  public closeModal() {
+    this.openDialog = !this.openDialog;
+  }
+
+  public editUser(item: User) {
+    this.openDialog = true;
+    this.getUser(item);
+  }
+
+  public getUser(item: User) {
+    UserService.getById(item.id.toString())
+      .then((data: any[]) => {
+        this.user = new User(data);
+        console.log(this.user);
+      })
+  }
+
+  public updateUser() {
+    UserService.update(this.user)
+      .then(() => {
+        this.getAllUsers();
+        this.openDialog = false;
+      })
+      .catch((err) => { console.log(err); });
+  }
+
   public deleteUser(item: User) {
     UserService.delete(item.id.toString())
       .then((item) => {
@@ -118,6 +164,10 @@ export default class Users extends Vue {
         this.getAllUsers();
       })
       .catch((err) => { console.log(err); });
+  }
+
+  public goToHome() {
+    return this.$router.push('/');
   }
 
   created() {
@@ -136,6 +186,10 @@ export default class Users extends Vue {
     justify-content: center
   &__wrapper
     flex-direction: column
+    &__actions
+      display: flex
+      gap: 30px
+      margin-bottom: 30px
   &__title
     display: flex
     justify-content: center
