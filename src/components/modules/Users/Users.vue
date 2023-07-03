@@ -27,48 +27,55 @@
           :headers="headers"
           hide-default-footer
         >
-           <template
-              v-slot:item.actions="{ item }"
+          <template v-slot:item.tasks="{ item }">
+            <v-chip
+              :color="getColor(item.id)"
             >
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    rounded
-                    icon
-                    @click="editUser(item)"
+              {{ item.id === 4 ? "Sim" : "Não"}}
+            </v-chip>
+          </template>
+          <template
+            v-slot:item.actions="{ item }"
+          >
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  rounded
+                  icon
+                  @click="editUser(item)"
+                >
+                  <v-icon
+                    size="large"
                   >
-                    <v-icon
-                      size="large"
-                    >
-                      mdi-pencil-outline
-                    </v-icon>
-                  </v-btn>
-                </template>
-                Editar usuário
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    rounded
-                    icon
+                    mdi-pencil-outline
+                  </v-icon>
+                </v-btn>
+              </template>
+              Editar usuário
+            </v-tooltip>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  rounded
+                  icon
+                  color="#ff0000"
+                  @click="deleteUser(item)"
+                >
+                  <v-icon
                     color="#ff0000"
-                    @click="deleteUser(item)"
+                    size="large"
                   >
-                    <v-icon
-                      color="#ff0000"
-                      size="large"
-                    >
-                      mdi-trash-can-outline
-                    </v-icon>
-                  </v-btn>
-                </template>
-                Excluir usuário
-              </v-tooltip>
-           </template>
+                    mdi-trash-can-outline
+                  </v-icon>
+                </v-btn>
+              </template>
+              Excluir usuário
+            </v-tooltip>
+          </template>
         </v-data-table>
       </v-col>
     </v-row>
@@ -109,10 +116,14 @@ export default class Users extends Vue {
         value: 'email',
       },
       {
+        text: 'Tarefas ativas?',
+        value: 'tasks',
+      },
+      {
         text: 'Ações',
         value: 'actions',
         sortable: false,
-      },
+      }
     ];
 
     return headers;
@@ -130,6 +141,11 @@ export default class Users extends Vue {
   public newUser() {
     console.log("aqui ficará a lógica para abrir um modal e criar usuário");
   }
+
+  public getColor (item: any): string {
+    if (item === 4) return 'green'
+    else return 'gray'
+  };
 
   public closeModal() {
     this.openDialog = !this.openDialog;
