@@ -103,21 +103,17 @@ export default class Users extends Vue {
   private get headers(): any {
     const headers = [
       {
+        text: 'ID',
+        value: 'id',
+      },
+      {
         text: 'Nome',
         align: 'start',
         value: 'name',
       },
       {
-        text: 'ID',
-        value: 'id',
-      },
-      {
         text: 'Email',
         value: 'email',
-      },
-      {
-        text: 'Tarefas ativas?',
-        value: 'tasks',
       },
       {
         text: 'Ações',

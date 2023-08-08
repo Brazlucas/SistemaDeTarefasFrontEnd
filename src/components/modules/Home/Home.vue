@@ -28,7 +28,8 @@ export default class Home extends Vue{
     return usuarios;
   }
   goToTasks() {
-    console.log('em breve');
+    const tarefas = this.$router.push('/tasks')
+    return tarefas;
   }
 }
 </script>
