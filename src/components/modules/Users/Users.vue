@@ -135,7 +135,7 @@ export default class Users extends Vue {
   }
 
   public newUser() {
-    console.log("aqui ficará a lógica para abrir um modal e criar usuário.");
+    console.log("aqui ficará a lógica para abrir um modal e criar usuário..");
   }
 
   public getColor (item: any): string {
