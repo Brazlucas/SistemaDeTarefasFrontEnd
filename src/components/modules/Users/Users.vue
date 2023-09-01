@@ -17,7 +17,7 @@
           Novo usuário
         </v-btn>
         <v-btn outlined @click="goToHome()">
-          <v-icon>mdi-arrow-left</v-icon>
+          <v-icon medium>mdi-arrow-left</v-icon>
           Voltar para o menu
         </v-btn>
       </div>
