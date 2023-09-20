@@ -18,7 +18,7 @@
         </v-btn>
         <v-btn outlined @click="goToHome()">
           <v-icon medium>mdi-arrow-left</v-icon>
-          Voltar para o menu
+          Voltar para o menu.
         </v-btn>
       </div>
       <v-col>
