@@ -134,10 +134,9 @@ export default class Users extends Vue {
       .catch((err: any) => { console.log(err) });
   }
 
-  public newUser() {
-    console.log('aqui ficará a lógica para criar o user.');
-    // UserService.create(this.user);
-  }
+  // public newUser() {
+  //   console.log('aqui ficará a lógica para criar o user.');
+  // }
 
   public getColor (item: any): string {
     if (item === 4) return 'green'
