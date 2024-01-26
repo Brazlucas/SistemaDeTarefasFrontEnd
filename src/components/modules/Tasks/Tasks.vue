@@ -167,9 +167,9 @@ export default class Tasks extends Vue {
     }
   }
 
-  public newTask() {
-    console.log("aqui ficará a lógica para abrir um modal e criar tarefa");
-  }
+  // public newTask() {
+  //   console.log("aqui ficará a lógica para abrir um modal e criar tarefa");
+  // }
 
   public getColor(item: any): string {
     if (item !== null) return 'green'
