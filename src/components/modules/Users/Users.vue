@@ -135,7 +135,7 @@ export default class Users extends Vue {
   }
 
   public newUser() {
-    console.log('aqui ficará a lógica para criar o user.');
+    console.log('aqui ficará a lógica para criar o user');
     // UserService.create(this.user);
   }
 
